@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../api/axios";
+import api from "../api/axios";
 import { Link } from "react-router-dom";
 
 function Home() {

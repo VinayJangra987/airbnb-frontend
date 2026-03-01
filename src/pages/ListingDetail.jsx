@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../api/axios";
+import api from "../api/axios";
 import { useParams } from "react-router-dom";
 
 function ListingDetail() {

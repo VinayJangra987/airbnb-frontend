@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../api/axios";
+import api from "../api/axios";
 
 export default function MyBookings() {
   const [bookings, setBookings] = useState([]);
