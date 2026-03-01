@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function ListingDetail() {
@@ -12,14 +12,10 @@ function ListingDetail() {
 
   // 🔹 Fetch single listing
   useEffect(() => {
-    axios.get(
-  `https://airbnb-backend-rvq9.onrender.com/api/listings/${id}`
-)
+    axios
+      .get(`https://airbnb-backend-rvq9.onrender.com/api/listings/${id}`)
       .then((res) => setListing(res.data))
-      .catch((err) => {
-        console.log(err);
-        alert("Failed to load listing");
-      });
+      .catch(() => alert("Failed to load listing"));
   }, [id]);
 
   // 🔹 Book Now handler
@@ -28,13 +24,20 @@ function ListingDetail() {
       alert("Please select start and end date");
       return;
     }
-const days = Math.ceil(
-  (new Date(endDate) - new Date(startDate)) /
-    (1000 * 60 * 60 * 24)
-);
+
+    const days = Math.ceil(
+      (new Date(endDate) - new Date(startDate)) /
+        (1000 * 60 * 60 * 24)
+    );
 
     if (days <= 0) {
       alert("End date must be after start date");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please login first");
       return;
     }
 
@@ -51,7 +54,7 @@ const days = Math.ceil(
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -71,19 +74,11 @@ const days = Math.ceil(
   return (
     <div style={{ padding: 20 }}>
       <h1>{listing.title}</h1>
-
       <p>{listing.description}</p>
+      <p><b>Location:</b> {listing.location}</p>
+      <p><b>Price per day:</b> ₹{listing.price}</p>
 
-      <p>
-        <b>Location:</b> {listing.location}
-      </p>
-
-      <p>
-        <b>Price per day:</b> ₹{listing.price}
-      </p>
-
-      {/* 🔹 Images */}
-      {listing.images && listing.images.length > 0 && (
+      {listing.images?.length > 0 && (
         <div style={{ marginBottom: 20 }}>
           {listing.images.map((img, i) => (
             <img
@@ -101,8 +96,6 @@ const days = Math.ceil(
 
       <h3>Book this place</h3>
 
-      <label>Start Date:</label>
-      <br />
       <input
         type="date"
         value={startDate}
@@ -111,8 +104,6 @@ const days = Math.ceil(
 
       <br /><br />
 
-      <label>End Date:</label>
-      <br />
       <input
         type="date"
         value={endDate}
