@@ -10,7 +10,7 @@ function Signup() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const res = await api.post("/auth/signup", {
+    const res = await api.post("/api/auth/signup", {
       name,
       email,
       password,

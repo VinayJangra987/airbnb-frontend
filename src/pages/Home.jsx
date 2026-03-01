@@ -9,7 +9,7 @@ function Home() {
   const [maxPrice, setMaxPrice] = useState("");
 
   useEffect(() => {
-    api.get("/listings")
+    api.get("/api/listings")
       .then((res) => setListings(res.data))
       .catch(() => alert("Failed to load listings"));
   }, []);
@@ -17,7 +17,7 @@ function Home() {
   const searchListings = async () => {
     try {
       const { data } = await api.get(
-        `/listings?location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+        `/api/listings?location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}`
       );
       setListings(data);
     } catch {
@@ -70,7 +70,7 @@ function Home() {
             maxWidth: 400,
           }}
         >
-          <Link to={`/listing/${l._id}`} style={{ textDecoration: "none" }}>
+          <Link to={`/api/listing/${l._id}`} style={{ textDecoration: "none" }}>
             <h3>{l.title}</h3>
           </Link>
 

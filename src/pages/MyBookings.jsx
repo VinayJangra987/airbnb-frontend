@@ -5,7 +5,7 @@ export default function MyBookings() {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    api.get("/bookings/my").then((res) => setBookings(res.data));
+    api.get("/api/bookings/my").then((res) => setBookings(res.data));
   }, []);
 
   return (

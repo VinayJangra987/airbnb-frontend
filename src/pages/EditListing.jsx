@@ -13,7 +13,7 @@ const EditListing = () => {
   });
 
   useEffect(() => {
-    api.get(`/listings/${id}`).then((res) => setForm(res.data));
+    api.get(`api/listings/${id}`).then((res) => setForm(res.data));
   }, [id]);
 
   const handleChange = (e) =>
@@ -21,7 +21,7 @@ const EditListing = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await api.put(`/listings/${id}`, form);
+    await api.put(`/api/listings/${id}`, form);
     navigate(`/listing/${id}`);
   };
 
