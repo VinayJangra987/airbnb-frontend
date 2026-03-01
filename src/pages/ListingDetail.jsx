@@ -42,7 +42,7 @@ const days = Math.ceil(
       setLoading(true);
 
       await axios.post(
-        "https://airbnb-backend-rvq9.onrender.com/:5000/api/bookings",
+        "https://airbnb-backend-rvq9.onrender.com/api/bookings",
         {
           listingId: listing._id,
           startDate,
