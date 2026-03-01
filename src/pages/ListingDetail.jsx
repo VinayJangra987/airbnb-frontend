@@ -12,8 +12,9 @@ function ListingDetail() {
 
   // 🔹 Fetch single listing
   useEffect(() => {
-    axios
-      .get(`https://airbnb-backend-rvq9.onrender.com/:5000/api/listings/${id}`)
+    axios.get(
+  `https://airbnb-backend-rvq9.onrender.com/api/listings/${id}`
+)
       .then((res) => setListing(res.data))
       .catch((err) => {
         console.log(err);
