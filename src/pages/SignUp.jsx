@@ -3,63 +3,32 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const navigate = useNavigate();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    try {
-      const res = await axios.post(
-        "https://airbnb-backend-rvq9.onrender.com/api/auth/signup",
-        { name, email, password }
-      );
-
-      console.log("SIGNUP RESPONSE 👉", res.data);
-
-      // save token
-      localStorage.setItem("token", res.data.token);
-
-      // go to home
-      navigate("/");
-    } catch (err) {
-      console.log("SIGNUP ERROR 👉", err.response?.data);
-      alert("Signup failed");
-    }
+    const res = await API.post("/api/auth/signup", {
+      name,
+      email,
+      password,
+    });
+    localStorage.setItem("token", res.data.token);
+    navigate("/");
   };
 
   return (
     <form onSubmit={submitHandler}>
-      <h2>Signup</h2>
-
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-
+      <input value={name} onChange={(e) => setName(e.target.value)} />
+      <input value={email} onChange={(e) => setEmail(e.target.value)} />
       <input
         type="password"
-        placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        required
       />
-
-      <button type="submit">Signup</button>
+      <button>Signup</button>
     </form>
   );
 }

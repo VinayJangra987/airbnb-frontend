@@ -7,90 +7,45 @@ function AddListing() {
     title: "",
     price: "",
     location: "",
-    description: ""
+    description: "",
   });
-
-  const [images, setImages] = useState([]); // ✅ ADD
+  const [images, setImages] = useState([]);
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    try {
-      // ✅ FormData use karna hoga
-      const formData = new FormData();
-      formData.append("title", form.title);
-      formData.append("price", form.price);
-      formData.append("location", form.location);
-      formData.append("description", form.description);
+    const formData = new FormData();
+    Object.keys(form).forEach((k) => formData.append(k, form[k]));
+    for (let img of images) formData.append("images", img);
 
-      // ✅ images append
-      for (let img of images) {
-        formData.append("images", img);
-      }
+    await API.post("/api/listings", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
-      const res = await axios.post(
-        "https://airbnb-backend-rvq9.onrender.com/api/listings",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "multipart/form-data",
-          },
-          timeout: 30000,
-        }
-      );
-
-      console.log("ADD LISTING RESPONSE 👉", res.data);
-      alert("Listing added successfully");
-      navigate("/");
-    } catch (err) {
-      console.log("ADD LISTING ERROR 👉", err.response?.data || err.message);
-      alert(err.response?.data?.message || "Something went wrong");
-    }
+    navigate("/");
   };
 
   return (
     <form onSubmit={submitHandler}>
-      <h2>Add Listing</h2>
-
       <input
         placeholder="Title"
-        value={form.title}
         onChange={(e) => setForm({ ...form, title: e.target.value })}
-        required
       />
-
       <input
         placeholder="Price"
-        value={form.price}
         onChange={(e) => setForm({ ...form, price: e.target.value })}
-        required
       />
-
       <input
         placeholder="Location"
-        value={form.location}
         onChange={(e) => setForm({ ...form, location: e.target.value })}
-        required
       />
-
       <textarea
         placeholder="Description"
-        value={form.description}
         onChange={(e) => setForm({ ...form, description: e.target.value })}
-        required
       />
-
-      {/* ✅ IMAGE INPUT */}
-      <input
-        type="file"
-        multiple
-        onChange={(e) => setImages(e.target.files)}
-        required
-      />
-
-      <button type="submit">Add</button>
+      <input type="file" multiple onChange={(e) => setImages(e.target.files)} />
+      <button>Add</button>
     </form>
   );
 }

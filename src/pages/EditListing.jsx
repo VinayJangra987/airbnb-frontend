@@ -9,30 +9,19 @@ const EditListing = () => {
     title: "",
     description: "",
     location: "",
-    price: ""
+    price: "",
   });
 
   useEffect(() => {
-    axios
-      .get(`https://airbnb-backend-rvq9.onrender.com/api/listings/${id}`)
-      .then(res => setForm(res.data));
+    API.get(`/api/listings/${id}`).then((res) => setForm(res.data));
   }, [id]);
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(
-      `https://airbnb-backend-rvq9.onrender.com/api/listings/${id}`,
-      form,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+    await API.put(`/api/listings/${id}`, form);
     navigate(`/listing/${id}`);
   };
 
@@ -41,8 +30,12 @@ const EditListing = () => {
       <input name="title" value={form.title} onChange={handleChange} />
       <input name="location" value={form.location} onChange={handleChange} />
       <input name="price" value={form.price} onChange={handleChange} />
-      <textarea name="description" value={form.description} onChange={handleChange} />
-      <button type="submit">Update Listing</button>
+      <textarea
+        name="description"
+        value={form.description}
+        onChange={handleChange}
+      />
+      <button type="submit">Update</button>
     </form>
   );
 };
