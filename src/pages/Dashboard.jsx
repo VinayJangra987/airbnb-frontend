@@ -7,15 +7,15 @@ function Dashboard() {
   const [bookings, setBookings] = useState([]);
 
   const cancelBookingHandler = async (id) => {
-    await API.put(`/api/bookings/${id}/cancel`);
+    await api.put(`/api/bookings/${id}/cancel`);
     setBookings((prev) =>
       prev.map((b) => (b._id === id ? { ...b, status: "cancelled" } : b))
     );
   };
 
   useEffect(() => {
-    API.get("/api/listings/me").then((res) => setListings(res.data));
-    API.get("/api/bookings/my").then((res) => setBookings(res.data));
+    api.get("/api/listings/me").then((res) => setListings(res.data));
+    api.get("/api/bookings/my").then((res) => setBookings(res.data));
   }, []);
 
   return (

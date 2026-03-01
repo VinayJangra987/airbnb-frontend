@@ -19,7 +19,7 @@ function AddListing() {
     Object.keys(form).forEach((k) => formData.append(k, form[k]));
     for (let img of images) formData.append("images", img);
 
-    await API.post("/api/listings", formData, {
+    await api.post("/api/listings", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
 

@@ -11,7 +11,7 @@ function ListingDetail() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    API.get(`/api/listings/${id}`)
+    api.get(`/api/listings/${id}`)
       .then((res) => setListing(res.data))
       .catch(() => alert("Failed to load listing"));
   }, [id]);
@@ -29,7 +29,7 @@ function ListingDetail() {
     try {
       setLoading(true);
 
-      await API.post("/api/bookings", {
+      await api.post("/api/bookings", {
         listingId: listing._id,
         startDate,
         endDate,
