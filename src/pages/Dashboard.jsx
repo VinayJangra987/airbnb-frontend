@@ -19,7 +19,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `https://airbnb-backend-rvq9.onrender.com/:5000/api/bookings/${bookingId}/cancel`,
+        `https://airbnb-backend-rvq9.onrender.com/api/bookings/${bookingId}/cancel`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -43,7 +43,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "https://airbnb-backend-rvq9.onrender.com/:5000/api/listings/me",
+        "https://airbnb-backend-rvq9.onrender.com/api/listings/me",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -61,7 +61,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        "https://airbnb-backend-rvq9.onrender.com/:5000/api/bookings/my",
+        "https://airbnb-backend-rvq9.onrender.com/api/bookings/my",
         {
           headers: { Authorization: `Bearer ${token}` },
         }

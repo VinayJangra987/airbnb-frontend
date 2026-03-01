@@ -5,7 +5,7 @@ export default function MyBookings() {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    axios.get("https://airbnb-backend-rvq9.onrender.com/:5000/api/bookings/me", {
+    axios.get("https://airbnb-backend-rvq9.onrender.com/api/bookings/me", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then(res => setBookings(res.data));
   }, []);

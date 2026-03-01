@@ -30,7 +30,7 @@ function AddListing() {
       }
 
       const res = await axios.post(
-        "https://airbnb-backend-rvq9.onrender.com/:5000/api/listings",
+        "https://airbnb-backend-rvq9.onrender.com/api/listings",
         formData,
         {
           headers: {

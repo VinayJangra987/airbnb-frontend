@@ -13,7 +13,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "https://airbnb-backend-rvq9.onrender.com/:5000/api/auth/login",
+        "https://airbnb-backend-rvq9.onrender.com/api/auth/login",
         { email, password }
       );
 

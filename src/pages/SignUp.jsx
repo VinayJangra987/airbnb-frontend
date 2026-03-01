@@ -14,7 +14,7 @@ function Signup() {
 
     try {
       const res = await axios.post(
-        "https://airbnb-backend-rvq9.onrender.com/:5000/api/auth/signup",
+        "https://airbnb-backend-rvq9.onrender.com/api/auth/signup",
         { name, email, password }
       );
 

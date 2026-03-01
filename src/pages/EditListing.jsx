@@ -14,7 +14,7 @@ const EditListing = () => {
 
   useEffect(() => {
     axios
-      .get(`https://airbnb-backend-rvq9.onrender.com/:5000/api/listings/${id}`)
+      .get(`https://airbnb-backend-rvq9.onrender.com/api/listings/${id}`)
       .then(res => setForm(res.data));
   }, [id]);
 
@@ -25,7 +25,7 @@ const EditListing = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.put(
-      `https://airbnb-backend-rvq9.onrender.com/:5000/api/listings/${id}`,
+      `https://airbnb-backend-rvq9.onrender.com/api/listings/${id}`,
       form,
       {
         headers: {
