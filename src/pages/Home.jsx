@@ -9,7 +9,7 @@ function Home() {
   const [maxPrice, setMaxPrice] = useState("");
 
   useEffect(() => {
-    api.get("/api/listings")
+    api.get("/listings")
       .then((res) => setListings(res.data))
       .catch(() => alert("Failed to load listings"));
   }, []);
@@ -17,7 +17,7 @@ function Home() {
   const searchListings = async () => {
     try {
       const { data } = await api.get(
-        `/api/listings?location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+        `/listings?location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}`
       );
       setListings(data);
     } catch {

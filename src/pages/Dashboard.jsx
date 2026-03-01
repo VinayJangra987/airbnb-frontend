@@ -14,8 +14,8 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    api.get("/api/listings/me").then((res) => setListings(res.data));
-    api.get("/api/bookings/my").then((res) => setBookings(res.data));
+    api.get("/listings/me").then((res) => setListings(res.data));
+    api.get("/bookings/my").then((res) => setBookings(res.data));
   }, []);
 
   return (
