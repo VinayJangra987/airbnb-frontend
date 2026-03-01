@@ -11,8 +11,7 @@ function Home() {
 
   // ✅ FETCH ALL LISTINGS (initial load)
   useEffect(() => {
-    axios
-      .get("https://airbnb-backend-rvq9.onrender.com/:5000/api/listings")
+   axios.get("https://airbnb-backend-rvq9.onrender.com/api/listings")
       .then((res) => setListings(res.data))
       .catch(() => alert("Failed to load listings"));
   }, []);
@@ -20,9 +19,9 @@ function Home() {
   // ✅ SEARCH FUNCTION
   const searchListings = async () => {
     try {
-      const { data } = await axios.get(
-        `https://airbnb-backend-rvq9.onrender.com/:5000/api/listings?location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}`
-      );
+    const { data } = await axios.get(
+  `https://airbnb-backend-rvq9.onrender.com/api/listings?location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+);
       setListings(data);
     } catch {
       alert("Search failed");
