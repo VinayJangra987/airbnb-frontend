@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api/axios"; // ✅ central axios
 import { useParams } from "react-router-dom";
 
 function ListingDetail() {
@@ -12,8 +12,7 @@ function ListingDetail() {
 
   // 🔹 Fetch single listing
   useEffect(() => {
-    axios
-      .get(`https://airbnb-backend-rvq9.onrender.com/api/listings/${id}`)
+    API.get(`/api/listings/${id}`)   // ✅ axios → API
       .then((res) => setListing(res.data))
       .catch(() => alert("Failed to load listing"));
   }, [id]);
@@ -35,29 +34,15 @@ function ListingDetail() {
       return;
     }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("Please login first");
-      return;
-    }
-
     try {
       setLoading(true);
 
-      await axios.post(
-        "https://airbnb-backend-rvq9.onrender.com/api/bookings",
-        {
-          listingId: listing._id,
-          startDate,
-          endDate,
-          totalPrice: listing.price * days,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await API.post("/api/bookings", {   // ✅ axios → API
+        listingId: listing._id,
+        startDate,
+        endDate,
+        totalPrice: listing.price * days,
+      });
 
       alert("Booking successful 🎉");
       setStartDate("");
