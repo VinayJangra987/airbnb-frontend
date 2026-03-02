@@ -7,6 +7,7 @@ import ListingDetail from "./pages/ListingDetail";
 import EditListing from "./pages/EditListing";
 import MyBookings from "./pages/MyBookings";
 import Dashboard from "./pages/Dashboard";
+import Navbar from "./components/Navbar";
 
 // 🔐 Protected Route
 const PrivateRoute = ({ children }) => {
@@ -17,15 +18,16 @@ const PrivateRoute = ({ children }) => {
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
+
       <Routes>
-        {/* Public routes */}
+        {/* Public */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/listing/:id" element={<ListingDetail />} />
 
-         <Route path="/listing/:id" element={<ListingDetail />} />
-
-        {/* Protected route */}
+        {/* Protected */}
         <Route
           path="/add"
           element={
@@ -34,24 +36,33 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/listing/:id/edit" element={
-  <PrivateRoute>
-    <EditListing />
-  </PrivateRoute>
-} />
-<Route path="/bookings" element={
-  <PrivateRoute>
-    <MyBookings />
-  </PrivateRoute>
-} />
-<Route
-  path="/dashboard"
-  element={
-    <PrivateRoute>
-      <Dashboard />
-    </PrivateRoute>
-  }
-/>
+
+        <Route
+          path="/listing/:id/edit"
+          element={
+            <PrivateRoute>
+              <EditListing />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/bookings"
+          element={
+            <PrivateRoute>
+              <MyBookings />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
