@@ -18,18 +18,21 @@ function MyBookings() {
       .catch(() => alert("Failed to load bookings"));
   }, []);
 
-  const cancelBooking = async (id) => {
-    try {
-      await api.put(`/api/bookings/${id}/cancel`);
-      setBookings((prev) =>
-        prev.map((b) =>
-          b._id === id ? { ...b, status: "cancelled" } : b
-        )
-      );
-    } catch {
-      alert("Cancel failed");
-    }
-  };
+ const cancelBooking = async (id) => {
+  try {
+    await api.put(`/api/bookings/${id}/cancel`);
+
+    // UI update after success
+    setBookings((prev) =>
+      prev.map((b) =>
+        b._id === id ? { ...b, status: "cancelled" } : b
+      )
+    );
+  } catch (err) {
+    console.error("Cancel error:", err);
+    alert(err.response?.data?.message || "Cancel failed");
+  }
+};
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-6">
