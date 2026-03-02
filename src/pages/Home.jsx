@@ -8,22 +8,22 @@ function Home() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
-  useEffect(() => {
-    api.get("/api/listings")
-      .then((res) => setListings(res.data))
-      .catch(() => alert("Failed to load listings"));
-  }, []);
+ useEffect(() => {
+  api.get("/api/listings")
+    .then((res) => setListings(res.data))
+    .catch(() => alert("Failed to load listings"));
+}, []);
 
-  const searchListings = async () => {
-    try {
-      const { data } = await api.get(
-        `/api/listings?location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}`
-      );
-      setListings(data);
-    } catch {
-      alert("Search failed");
-    }
-  };
+const searchListings = async () => {
+  try {
+    const { data } = await api.get(
+      `/api/listings?location=${location}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+    );
+    setListings(data);
+  } catch {
+    alert("Search failed");
+  }
+};
 
   return (
     <div style={{ padding: 20 }}>
@@ -70,7 +70,7 @@ function Home() {
             maxWidth: 400,
           }}
         >
-          <Link to={`/api/listing/${l._id}`} style={{ textDecoration: "none" }}>
+          <Link to={`/listing/${l._id}`} style={{ textDecoration: "none" }}>
             <h3>{l.title}</h3>
           </Link>
 

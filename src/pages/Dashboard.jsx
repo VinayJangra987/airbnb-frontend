@@ -13,10 +13,10 @@ function Dashboard() {
     );
   };
 
-  useEffect(() => {
-    api.get("/api/listings/me").then((res) => setListings(res.data));
-    api.get("/api/bookings/my").then((res) => setBookings(res.data));
-  }, []);
+useEffect(() => {
+  api.get("/api/listings/me").then((res) => setListings(res.data));
+  api.get("/api/bookings/my").then((res) => setBookings(res.data));
+}, []);
 
   return (
     <div>
@@ -24,9 +24,9 @@ function Dashboard() {
 
       <h3>My Listings</h3>
       {listings.map((l) => (
-        <Link key={l._id} to={`/api/listing/${l._id}`}>
-          {l.title}
-        </Link>
+       <Link key={l._id} to={`/listing/${l._id}`}>
+  {l.title}
+</Link>
       ))}
 
       <h3>My Bookings</h3>

@@ -13,7 +13,7 @@ const EditListing = () => {
   });
 
   useEffect(() => {
-    api.get(`api/listings/${id}`).then((res) => setForm(res.data));
+    api.get(`/api/listings/${id}`).then((res) => setForm(res.data));
   }, [id]);
 
   const handleChange = (e) =>

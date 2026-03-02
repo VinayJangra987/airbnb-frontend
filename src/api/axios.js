@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_api_BASE_URL,
+  baseURL: "https://airbnb-backend-rvq9.onrender.com",
 });
 
 api.interceptors.request.use((req) => {
