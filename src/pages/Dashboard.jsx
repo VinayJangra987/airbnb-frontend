@@ -8,7 +8,7 @@ function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         
         {/* My Listings */}
-        <Link to="/dashboard" className="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
+        <Link to="/my-listings" className="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition">
           <h3 className="text-xl font-semibold mb-2">My Listings</h3>
           <p className="text-gray-500">View & manage your properties</p>
         </Link>

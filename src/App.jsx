@@ -8,6 +8,7 @@ import EditListing from "./pages/EditListing";
 import MyBookings from "./pages/MyBookings";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
+import MyListings from "./pages/MyListings";
 
 // 🔐 Protected Route
 const PrivateRoute = ({ children }) => {
@@ -26,6 +27,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/listing/:id" element={<ListingDetail />} />
+        <Route
+  path="/my-listings"
+  element={
+    <PrivateRoute>
+      <MyListings />
+    </PrivateRoute>
+  }
+/>
 
         {/* Protected */}
         <Route

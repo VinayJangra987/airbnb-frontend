@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { Link } from "react-router-dom";
+
 import ListingSkeleton from "../components/ListingSkeleton";
 import SafeImage from "../components/SafeImage";
 import HorizontalSection from "../components/HorizontalSection";

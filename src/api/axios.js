@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://airbnb-backend-rvq9.onrender.com",
+  // baseURL: "https://airbnb-backend-rvq9.onrender.com",  // comment out karo
+  baseURL: "http://localhost:5000",  // ← yeh uncomment karo
 });
 
 api.interceptors.request.use((req) => {
